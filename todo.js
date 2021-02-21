@@ -4,13 +4,13 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = 'toDos';
 
-const toDos=[];
+let toDos=[];
 
 function deleteToDo(event){
     const btn = event.target;
     const li =btn.parentNode;
     toDOList.removeChild(li);
-    const cleanToDos = toDos.filter(function(toDo){
+    let cleanToDos = toDos.filter(function(toDo){
         return toDo.id !== parseInt(li.id);
     });
     toDos = cleanToDos;
@@ -31,7 +31,7 @@ function loadToDos(){
 function paintToDo(text){
     const li = document.createElement("li");
     const delBtn = document.createElement("button");
-    delBtn.innerHTML="X";
+    delBtn.innerHTML=`<i class="fas fa-trash"></i>`;;
     delBtn.addEventListener("click",deleteToDo);
     const span = document.createElement("span");
     span.innerText = text;
@@ -50,6 +50,7 @@ function paintToDo(text){
 function handleSubmit(event){
     event.preventDefault();
     const currentValue = toDoInput.value;
+    toDoInput.value="";
     paintToDo(currentValue);
 }
 function init(){
